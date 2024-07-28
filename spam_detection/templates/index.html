@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Detection</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Spam Detection</h1>
+        <form action="/predict" method="post">
+            <label for="message">Enter SMS Message:</label>
+            <textarea id="message" name="message" rows="4" cols="50" required>{{ message if message else '' }}</textarea>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+        <h2>Prediction Results:</h2>
+        <div class="result">
+            <h3>Naive Bayes</h3>
+            <p>Prediction: {{ prediction.naive_bayes.prediction }}</p>
+            <p>Probability: {{ prediction.naive_bayes.probability }}</p>
+        </div>
+        <div class="result">
+            <h3>Random Forest</h3>
+            <p>Prediction: {{ prediction.random_forest.prediction }}</p>
+            <p>Probability: {{ prediction.random_forest.probability }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
